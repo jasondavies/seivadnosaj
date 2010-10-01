@@ -42,7 +42,7 @@ class ProxyHandler(webapp.RequestHandler):
     raw = fetch(url)
     self.response.headers["Content-Type"] = "text/javascript"
     self.response.out.write('%s("' % callback)
-    self.response.out.write('data:%s,' % escapejs(raw.headers.get('Content-Type', '')))
+    self.response.out.write('data:%s;base64,' % escapejs(raw.headers.get('Content-Type', '')))
     self.response.out.write(base64.b64encode(raw.content))
     self.response.out.write('")')
 
