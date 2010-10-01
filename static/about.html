@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>seivadnosaj</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
     <script type="text/javascript">
@@ -15,12 +16,19 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <h1>seivadnosaj</h1>
-    <p>Various utilities running on Google AppEngine.</p>
-    <h2>Proxy</h2>
-    <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.
-    <p><input type="text" id="url" value="http://www.jasondavies.com/media/img/jason.jpg" /> <input type="button" value="Load image" id="load" /></p>
-    <canvas id="canvas" style="cursor: pointer"></canvas>
+    <div class="body">
+      <h1>seivadnosaj</h1>
+      <a href="http://github.com/jasondavies/seivadnosaj"><img
+        style="position:absolute;top:0;right:0;border:0;"
+        width="149" height="149" src="forkme.png" alt="Fork me on GitHub"
+        /></a>
+      <p>Various utilities running on <a href="http://appengine.google.com/">Google App Engine</a>.</p>
+      <h2>Proxy</h2>
+      <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.
+      <p><input type="text" id="url" value="http://www.jasondavies.com/media/img/jason.jpg" style="width: 200px" />
+        <input type="button" value="Load image" id="load" /></p>
+      <canvas id="canvas" style="cursor: pointer"></canvas>
+    </div>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript">
       $(function() {

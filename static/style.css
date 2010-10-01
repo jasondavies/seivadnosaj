@@ -1,0 +1,9 @@
+body {
+  margin-top: 1em;
+  font: 14px Helvetica Neue;
+}
+
+.body {
+  width: 960px;
+  margin: auto;
+}

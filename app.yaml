@@ -8,9 +8,17 @@ handlers:
   static_files: static/about.html
   upload: static/about.html
 
+- url: /forkme.png
+  static_files: static/forkme.png
+  upload: static/forkme.png
+
 - url: /jquery.min.js
   static_files: static/jquery.min.js
   upload: static/jquery.min.js
+
+- url: /style.css
+  static_files: static/style.css
+  upload: static/style.css
 
 - url: .*
   script: main.py
