@@ -25,10 +25,24 @@
       <p>Various utilities running on <a href="http://appengine.google.com/">Google App Engine</a>.</p>
       <h2>Proxy</h2>
       <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.
+      <h3>Usage</h3>
+      <code><pre>$.get('http://seivadnosaj.appengine.com/proxy', {
+  url: 'http://www.jasondavies.com/media/img/jason.jpg'
+}, function(data) {
+  var img = new Image();
+  img.onload = function() {
+    var w = img.width, h = img.height;
+    $('#canvas').attr('width', w).attr('height', h);
+    context.width = w; context.height = h;
+    context.drawImage(img, 0, 0, w, h);
+  };
+  img.src = data;
+}, 'jsonp');</pre></code>
+      <h3>Example</h3>
       <p><input type="text" id="url" value="http://www.jasondavies.com/media/img/jason.jpg" style="width: 200px" />
         <input type="button" value="Load image" id="load" /></p>
       <canvas id="canvas" style="cursor: pointer"></canvas>
-      <div style="text-align: right">Created by <a href="http://www.jasondavies.com/">Jason Davies</a>.</div>
+      <div style="text-align: right; font-style: italic">Created by <a href="http://www.jasondavies.com/">Jason Davies</a>.</div>
     </div>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript">
@@ -36,17 +50,15 @@
         var canvas = document.getElementById('canvas'),
             c = canvas.getContext("2d");
         $('#load').click(function() {
-          $.get('proxy', {
+          $.get('http://seivadnosaj.appengine.com/proxy', {
             url: $('#url').val()
           }, function(data) {
             var img = new Image();
             img.onload = function() {
-              w = Math.min(img.width, img.height);
-              $(canvas).attr('width', img.width);
-              $(canvas).attr('height', img.height);
-              c.width = img.width;
-              c.height = img.height;
-              c.drawImage(img, 0, 0, img.width, img.height);
+              var w = img.width, h = img.height;
+              $(canvas).attr('width', w).attr('height', h);
+              c.width = w; c.height = h;
+              c.drawImage(img, 0, 0, w, h);
             };
             img.src = data;
           }, 'jsonp');
