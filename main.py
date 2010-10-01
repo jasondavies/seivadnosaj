@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-
 import base64
 import wsgiref.handlers
 from google.appengine.ext import webapp
