@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>seivadnosaj</title>
+    <title>seivadnosaj.appspot.com</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
@@ -17,7 +17,7 @@
       })();
     </script>
     <div class="body">
-      <h1>seivadnosaj</h1>
+      <h1>seivadnosaj.appspot.com</h1>
       <a href="http://github.com/jasondavies/seivadnosaj"><img
         style="position:absolute;top:0;right:0;border:0;"
         width="149" height="149" src="forkme.png" alt="Fork me on GitHub"
@@ -26,7 +26,7 @@
       <h2>Proxy</h2>
       <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.
       <h3>Usage</h3>
-      <code><pre>$.get('http://seivadnosaj.appengine.com/proxy', {
+      <code><pre>$.get('http://seivadnosaj.appspot.com/proxy', {
   url: 'http://www.jasondavies.com/media/img/jason.jpg'
 }, function(data) {
   var img = new Image();
@@ -50,7 +50,7 @@
         var canvas = document.getElementById('canvas'),
             c = canvas.getContext("2d");
         $('#load').click(function() {
-          $.get('http://seivadnosaj.appengine.com/proxy', {
+          $.get('http://seivadnosaj.appspot.com/proxy', {
             url: $('#url').val()
           }, function(data) {
             var img = new Image();
