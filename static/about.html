@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>seivadnosaj</title>
+  </head>
+  <body>
+    <h1>seivadnosaj</h1>
+    <p>Various utilities running on Google AppEngine.</p>
+    <h2>Proxy</h2>
+    <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.
+    <p><input type="text" id="url" value="http://www.jasondavies.com/media/img/jason.jpg" /> <input type="button" value="Load image" id="load" /></p>
+    <canvas id="canvas" style="cursor: pointer"></canvas>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var canvas = document.getElementById('canvas'),
+            c = canvas.getContext("2d");
+        $('#load').click(function() {
+          $.get('proxy', {
+            url: $('#url').val()
+          }, function(data) {
+            var img = new Image();
+            img.onload = function() {
+              w = Math.min(img.width, img.height);
+              $(canvas).attr('width', img.width);
+              $(canvas).attr('height', img.height);
+              c.width = img.width;
+              c.height = img.height;
+              c.drawImage(img, 0, 0, img.width, img.height);
+            };
+            img.src = data;
+          }, 'jsonp');
+        });
+        $('#canvas').click(function() {
+          var imgd = c.getImageData(0, 0, c.width, c.height);
+          var pix = imgd.data;
+          for (var i = 0, n = pix.length; i < n; i += 4) {
+            pix[i  ] = 255 - pix[i  ]; // red
+            pix[i+1] = 255 - pix[i+1]; // green
+            pix[i+2] = 255 - pix[i+2]; // blue
+            // i+3 is alpha (the fourth element)
+          }
+          c.putImageData(imgd, 0, 0);
+        });
+      });
+    </script>
+  </body>
+</html>

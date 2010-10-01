@@ -8,5 +8,9 @@ handlers:
   static_files: static/about.html
   upload: static/about.html
 
+- url: /jquery.min.js
+  static_files: static/jquery.min.js
+  upload: static/jquery.min.js
+
 - url: .*
   script: main.py
