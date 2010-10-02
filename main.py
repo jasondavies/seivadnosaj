@@ -35,7 +35,10 @@ class ProxyHandler(webapp.RequestHandler):
       self.error(404)
       return
     callback = self.request.GET.get('callback', '')
-    raw = fetch(url)
+    headers = {}
+    if 'Cache-Control' in self.request.headers:
+        headers['Cache-Control'] = self.request.headers.get('Cache-Control')
+    raw = fetch(url, headers=headers)
     self.response.headers["Content-Type"] = "text/javascript"
     self.response.out.write('%s("' % callback)
     self.response.out.write('data:%s;base64,' % escapejs(raw.headers.get('Content-Type', '')))

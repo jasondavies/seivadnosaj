@@ -24,7 +24,8 @@
         /></a>
       <p>Various utilities running on <a href="http://appengine.google.com/">Google App Engine</a>.</p>
       <h2>Proxy</h2>
-      <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.
+      <p>This is a handy JSONP proxy.  For example, this can be used to load an image from any URL and bypass the browser's same-origin security policy when manipulating the pixel data via <code>&lt;canvas&gt;</code>.</p>
+      <p>Note: App Engine seems to have a fairly aggressive caching policy, so you may need to pass something like <code>Cache-Control: max-age=0</code> in the request headers depending on your application.</p>
       <h3>Usage</h3>
       <code><pre>$.get('http://seivadnosaj.appspot.com/proxy', {
   url: 'http://www.jasondavies.com/media/img/jason.jpg'
