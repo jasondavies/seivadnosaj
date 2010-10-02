@@ -4,7 +4,6 @@ import base64
 import wsgiref.handlers
 from google.appengine.ext import webapp
 from google.appengine.api.urlfetch import fetch
-from google.appengine.dist import use_library
 
 _base_js_escapes = (
   ('\\', r'\u005C'),
