@@ -3,7 +3,7 @@
 import base64
 import wsgiref.handlers
 from google.appengine.ext import webapp
-from google.appengine.api.urlfetch import fetch
+from google.appengine.api.urlfetch import fetch, InvalidURLError
 
 _base_js_escapes = (
   ('\\', r'\u005C'),
@@ -38,7 +38,12 @@ class ProxyHandler(webapp.RequestHandler):
     headers = {}
     if 'Cache-Control' in self.request.headers:
       headers['Cache-Control'] = self.request.headers.get('Cache-Control')
-    raw = fetch(url, headers=headers)
+    try:
+      raw = fetch(url, headers=headers)
+    except InvalidURLError:
+      self.error(400)
+      self.response.out.write('Error: Invalid URL.')
+      return
     self.response.headers["Content-Type"] = "text/javascript"
     self.response.out.write('%s("' % callback)
     self.response.out.write('data:%s;base64,' % escapejs(raw.headers.get('Content-Type', '')))
