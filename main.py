@@ -27,24 +27,6 @@ def escapejs(value):
     value = value.replace(bad, good)
   return value
 
-class EchoHandler(webapp.RequestHandler):
-  """Echoes an uploaded file via JSONP."""
-  def get(self):
-    url = self.request.GET.get('url', None)
-    if url is None:
-      self.error(404)
-      return
-    callback = self.request.GET.get('callback', '')
-    headers = {}
-    if 'Cache-Control' in self.request.headers:
-      headers['Cache-Control'] = self.request.headers.get('Cache-Control')
-    raw = fetch(url, headers=headers)
-    self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write('%s("' % callback)
-    self.response.out.write('data:%s;base64,' % escapejs(raw.headers.get('Content-Type', '')))
-    self.response.out.write(base64.b64encode(raw.content))
-    self.response.out.write('")')
-
 class ProxyHandler(webapp.RequestHandler):
   """Proxies a URL via JSONP."""
   def get(self):
