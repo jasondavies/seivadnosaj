@@ -28,7 +28,7 @@
       <p>Note: App Engine seems to have a fairly aggressive caching policy, so you may need to pass something like <code>Cache-Control: max-age=0</code> in the request headers depending on your application.</p>
       <h3>Usage</h3>
       <code><pre>$.get('http://seivadnosaj.appspot.com/proxy', {
-  url: 'http://www.jasondavies.com/media/img/jason.jpg'
+  url: '<a href="http://www.jasondavies.com/media/img/jason.jpg">http://www.jasondavies.com/media/img/jason.jpg</a>'
 }, function(data) {
   var img = new Image();
   img.onload = function() {
@@ -40,9 +40,10 @@
   img.src = data;
 }, 'jsonp');</pre></code>
       <h3>Demo</h3>
+      <p>When the image has loaded, click on it to view its negative.</p>
       <p><input type="text" id="url" value="http://www.jasondavies.com/media/img/jason.jpg" style="width: 200px" />
         <input type="button" value="Load image" id="load" /></p>
-      <canvas id="canvas" style="cursor: pointer"></canvas>
+      <canvas id="canvas" style="cursor: pointer" width="0" height="0"></canvas>
       <h3>In the Wild</h3>
       <ul>
         <li><a href="http://www.jasondavies.com/catmap/">Arnold's Cat Map</a></li>
