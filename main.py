@@ -38,17 +38,16 @@ class ProxyHandler(webapp.RequestHandler):
     headers = {}
     if 'Cache-Control' in self.request.headers:
       headers['Cache-Control'] = self.request.headers.get('Cache-Control')
+    self.response.headers["Content-Type"] = "text/javascript"
+    self.response.out.write('%s(' % callback)
     try:
       raw = fetch(url, headers=headers)
+      self.response.out.write('"data:%s;base64,' % escapejs(raw.headers.get('Content-Type', '')))
+      self.response.out.write(base64.b64encode(raw.content))
+      self.response.out.write('"')
     except InvalidURLError:
-      self.error(400)
-      self.response.out.write('Error: Invalid URL.')
-      return
-    self.response.headers["Content-Type"] = "text/javascript"
-    self.response.out.write('%s("' % callback)
-    self.response.out.write('data:%s;base64,' % escapejs(raw.headers.get('Content-Type', '')))
-    self.response.out.write(base64.b64encode(raw.content))
-    self.response.out.write('")')
+      self.response.out.write('{"error": "Invalid URL."}')
+    self.response.out.write(')')
 
 def main():
   application = webapp.WSGIApplication([
